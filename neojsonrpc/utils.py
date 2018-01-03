@@ -1,0 +1,73 @@
+"""
+    NEO JSON-RPC client utilities
+    =============================
+
+    This module defines utilities and shortcuts used by the NEO JSON-RPC client.
+
+"""
+
+import binascii
+import copy
+import re
+
+from .constants import ContractParameterTypes
+
+
+def is_hash256(s):
+    """ Returns True if the considered string is a hash256. """
+    if not s or not isinstance(s, str):
+        return False
+    return re.match('^[0-9A-F]{64}$', s.strip(), re.IGNORECASE)
+
+
+def is_hash160(s):
+    """ Returns True if the considered string is a hash160. """
+    if not s or not isinstance(s, str):
+        return False
+    if not len(s) == 40:
+        return False
+    for c in s:
+        if (c < '0' or c > '9') and (c < 'A' or c > 'F') and (c < 'a' or c > 'f'):
+            return False
+    return True
+
+
+def encode_params(params):
+    """ Returns a list of paramaters meant to be passed to JSON-RPC endpoints. """
+    final_params = []
+    for p in params:
+        if isinstance(p, bool):
+            final_params.append({'type': ContractParameterTypes.Boolean.value, 'value': p})
+        elif isinstance(p, int):
+            final_params.append({'type': ContractParameterTypes.Integer.value, 'value': p})
+        elif is_hash256(p):
+            final_params.append({'type': ContractParameterTypes.HASH256.value, 'value': p})
+        elif is_hash160(p):
+            final_params.append({'type': ContractParameterTypes.HASH160.value, 'value': p})
+        elif isinstance(p, bytearray):
+            final_params.append({'type': ContractParameterTypes.BYTE_ARRAY.value, 'value': p})
+        elif isinstance(p, str):
+            final_params.append({'type': ContractParameterTypes.STRING.value, 'value': p})
+        elif isinstance(p, list):
+            innerp = encode_params(p)
+            final_params.append({'type': ContractParameterTypes.ARRAY.value, 'value': innerp})
+    return final_params
+
+
+def decode_contract_result(result):
+    """ Tries to decode the values embedded in a contract result dictionary. """
+    if 'stack' not in result:
+        return result
+    result = copy.deepcopy(result)
+    result['stack'] = _decode_contract_result_stack(result['stack'])
+    return result
+
+
+def _decode_contract_result_stack(stack):
+    stack = copy.deepcopy(stack)
+    for value_dict in stack:
+        if value_dict['type'] == 'Array':
+            value_dict['value'] = _decode_contract_result_stack(value_dict['value'])
+        elif value_dict['type'] == 'ByteArray':
+            value_dict['value'] = bytearray(binascii.unhexlify(value_dict['value'].encode('utf-8')))
+    return stack
