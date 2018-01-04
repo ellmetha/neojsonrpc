@@ -74,6 +74,24 @@ class JSONRPCMethods(Enum):
     # parameters but the contract's storage remain unchanged.
     INVOKE = 'invoke'
 
+    # The 'invokefunction' method allows to invoke a contract (associated with a specific script
+    # hash) by specifying an operation and potential parameters. It should be noted that calling
+    # this method does not affect the blockchain in any way: the targetted contract is executed with
+    # the given parameters but the contract's storage remain unchanged.
+    INVOKE_FUNCTION = 'invokefunction'
+
+    # The 'invokescript' method allows to invoke a specific script that'll be run through the VM and
+    # to get the corresponding result. This method is to test VM script as if they were ran on the
+    # blockchain at a specific point in time. This RPC call does not affect the blockchain in any
+    # way.
+    INVOKE_SCRIPT = 'invokescript'
+
+    # The 'sendrawtransaction' method allows to broadcast a transaction over the NEO network.
+    SEND_RAW_TRANSACTION = 'sendrawtransaction'
+
+    # The 'validateaddress' method allows to validate if a string is a valid NEO address.
+    VALIDATE_ADDRESS = 'validateaddress'
+
 
 class ContractParameterTypes(Enum):
     """ Defines the contract parameter types supported by the NEO JSON-RPC endpoints. """

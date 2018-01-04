@@ -32,7 +32,7 @@ def is_hash160(s):
     return True
 
 
-def encode_params(params):
+def encode_invocation_params(params):
     """ Returns a list of paramaters meant to be passed to JSON-RPC endpoints. """
     final_params = []
     for p in params:
@@ -49,25 +49,25 @@ def encode_params(params):
         elif isinstance(p, str):
             final_params.append({'type': ContractParameterTypes.STRING.value, 'value': p})
         elif isinstance(p, list):
-            innerp = encode_params(p)
+            innerp = encode_invocation_params(p)
             final_params.append({'type': ContractParameterTypes.ARRAY.value, 'value': innerp})
     return final_params
 
 
-def decode_contract_result(result):
-    """ Tries to decode the values embedded in a contract result dictionary. """
+def decode_invocation_result(result):
+    """ Tries to decode the values embedded in an invocation result dictionary. """
     if 'stack' not in result:
         return result
     result = copy.deepcopy(result)
-    result['stack'] = _decode_contract_result_stack(result['stack'])
+    result['stack'] = _decode_invocation_result_stack(result['stack'])
     return result
 
 
-def _decode_contract_result_stack(stack):
+def _decode_invocation_result_stack(stack):
     stack = copy.deepcopy(stack)
     for value_dict in stack:
         if value_dict['type'] == 'Array':
-            value_dict['value'] = _decode_contract_result_stack(value_dict['value'])
+            value_dict['value'] = _decode_invocation_result_stack(value_dict['value'])
         elif value_dict['type'] == 'ByteArray':
             value_dict['value'] = bytearray(binascii.unhexlify(value_dict['value'].encode('utf-8')))
     return stack

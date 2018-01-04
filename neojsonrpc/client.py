@@ -15,7 +15,7 @@ from requests.exceptions import HTTPError
 
 from .constants import JSONRPCMethods
 from .exceptions import ProtocolError, TransportError
-from .utils import decode_contract_result, encode_params
+from .utils import decode_invocation_result, encode_invocation_params
 
 
 class Client:
@@ -234,7 +234,7 @@ class Client:
         return self._call(JSONRPCMethods.GET_VERSION.value, **kwargs)
 
     def invoke(self, script_hash, params, **kwargs):
-        """ Invoke a contract with given parameters and returns the result.
+        """ Invokes a contract with given parameters and returns the result.
 
         It should be noted that the name of the function invoked in the contract should be part of
         paramaters.
@@ -244,13 +244,66 @@ class Client:
         :type script_hash: str
         :type params: list
         :return: result of the invocation
-        :rtype: bytearray
+        :rtype: dictionary
 
         """
-        contract_params = encode_params(params)
+        contract_params = encode_invocation_params(params)
         raw_result = self._call(
             JSONRPCMethods.INVOKE.value, [script_hash, contract_params, ], **kwargs)
-        return decode_contract_result(raw_result)
+        return decode_invocation_result(raw_result)
+
+    def invoke_function(self, script_hash, operation, params, **kwargs):
+        """ Invokes a contract's function with given parameters and returns the result.
+
+        :param script_hash: contract script hash
+        :param operation: name of the operation to invoke
+        :param params: list of paramaters to be passed in to the smart contract
+        :type script_hash: str
+        :type operation: str
+        :type params: list
+        :return: result of the invocation
+        :rtype: dictionary
+
+        """
+        contract_params = encode_invocation_params(params)
+        raw_result = self._call(
+            JSONRPCMethods.INVOKE_FUNCTION.value, [script_hash, operation, contract_params, ],
+            **kwargs)
+        return decode_invocation_result(raw_result)
+
+    def invoke_script(self, script, **kwargs):
+        """ Invokes a script on the VM and returns the result.
+
+        :param script: script runnable by the VM
+        :type script: str
+        :return: result of the invocation
+        :rtype: dictionary
+
+        """
+        raw_result = self._call(JSONRPCMethods.INVOKE_SCRIPT.value, [script, ], **kwargs)
+        return decode_invocation_result(raw_result)
+
+    def send_raw_transaction(self, hextx, **kwargs):
+        """ Broadcasts a transaction over the NEO network and returns the result.
+
+        :param hextx: hexadecimal string that has been serialized
+        :type hextx: str
+        :return: result of the transaction
+        :rtype: bool
+
+        """
+        return self._call(JSONRPCMethods.SEND_RAW_TRANSACTION.value, [hextx, ], **kwargs)
+
+    def validate_address(self, addr, **kwargs):
+        """ Validates if the considered string is a valid NEO address.
+
+        :param hex: string containing a potential NEO address
+        :type hex: str
+        :return: dictionary containing the result of the verification
+        :rtype: dictionary
+
+        """
+        return self._call(JSONRPCMethods.VALIDATE_ADDRESS.value, [addr, ], **kwargs)
 
     ##################################
     # PRIVATE METHODS AND PROPERTIES #
