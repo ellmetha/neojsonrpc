@@ -51,7 +51,7 @@ class Client:
         :param script_hash: contract script hash
         :type script_hash: str
         :return: :class:`ContractWrapper <ContractWrapper>` object
-        :rtype: neojsonrpc.ContractWrapper
+        :rtype: neojsonrpc.client.ContractWrapper
 
         """
         return ContractWrapper(self, script_hash)
