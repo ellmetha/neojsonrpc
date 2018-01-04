@@ -12,3 +12,6 @@
 
 
 __version__ = '0.1.0.dev'
+
+
+from .client import Client, ContractWrapper  # noqa: F401

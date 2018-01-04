@@ -45,6 +45,17 @@ class Client:
         """ Creates a ``Client`` instance for use with the NEO Test Net. """
         return cls(host='seed3.neo.org', port=20331, tls=True)
 
+    def contract(self, script_hash):
+        """ Returns a ``ContractWrapper`` instance allowing to easily invoke contract functions.
+
+        :param script_hash: contract script hash
+        :type script_hash: str
+        :return: :class:`ContractWrapper <ContractWrapper>` object
+        :rtype: neojsonrpc.ContractWrapper
+
+        """
+        return ContractWrapper(self, script_hash)
+
     ####################
     # JSON-RPC METHODS #
     ####################
@@ -354,3 +365,31 @@ class Client:
                 data=response_data)
 
         return response_data['result']
+
+
+class ContractWrapper:
+    """ Strategy class allowing to provide a high-level interface for invoking smart contracts. """
+
+    def __init__(self, client, script_hash):
+        self.client = client
+        self.script_hash = script_hash
+
+    def __getattribute__(self, attr):
+        try:
+            return super(ContractWrapper, self).__getattribute__(attr)
+        except AttributeError:
+            client = super(ContractWrapper, self).__getattribute__('client')
+            script_hash = super(ContractWrapper, self).__getattribute__('script_hash')
+            return ContractFunctionWrapper(client, script_hash, attr)
+
+
+class ContractFunctionWrapper:
+    """ Strategy class allowing to easily invoke smart contract functions. """
+
+    def __init__(self, client, script_hash, funcname):
+        self.client = client
+        self.script_hash = script_hash
+        self.funcname = funcname
+
+    def __call__(self, *args):
+        return self.client.invoke_function(self.script_hash, self.funcname, args)
