@@ -342,7 +342,7 @@ class Client:
             response.raise_for_status()
         except HTTPError:
             raise TransportError(
-                'Go unsuccessful response from server (status code: {})'.format(
+                'Got unsuccessful response from server (status code: {})'.format(
                     response.status_code),
                 response=response)
 
