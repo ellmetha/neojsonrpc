@@ -22,7 +22,7 @@ class TransportError(JSONRPCError):
     """ Raised when an error occurs related to the connection with the JSON-RPC server. """
 
     def __init__(self, msg, response):
-        super(ProtocolError, self).__init__(msg)
+        super(TransportError, self).__init__(msg)
         self.response = response
 
 
