@@ -14,14 +14,14 @@ from .constants import ContractParameterTypes
 
 
 def is_hash256(s):
-    """ Returns True if the considered string is a hash256. """
+    """ Returns True if the considered string is a valid SHA256 hash. """
     if not s or not isinstance(s, str):
         return False
     return re.match('^[0-9A-F]{64}$', s.strip(), re.IGNORECASE)
 
 
 def is_hash160(s):
-    """ Returns True if the considered string is a hash160. """
+    """ Returns True if the considered string is a valid RIPEMD160 hash. """
     if not s or not isinstance(s, str):
         return False
     if not len(s) == 40:
@@ -37,9 +37,9 @@ def encode_invocation_params(params):
     final_params = []
     for p in params:
         if isinstance(p, bool):
-            final_params.append({'type': ContractParameterTypes.Boolean.value, 'value': p})
+            final_params.append({'type': ContractParameterTypes.BOOLEAN.value, 'value': p})
         elif isinstance(p, int):
-            final_params.append({'type': ContractParameterTypes.Integer.value, 'value': p})
+            final_params.append({'type': ContractParameterTypes.INTEGER.value, 'value': p})
         elif is_hash256(p):
             final_params.append({'type': ContractParameterTypes.HASH256.value, 'value': p})
         elif is_hash160(p):
