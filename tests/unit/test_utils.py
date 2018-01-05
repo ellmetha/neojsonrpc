@@ -1,5 +1,5 @@
-from neojsonrpc.utils import (
-    decode_invocation_result, encode_invocation_params, is_hash160, is_hash256)
+from neojsonrpc.utils import (decode_invocation_result, encode_invocation_params, is_hash160,
+                              is_hash256)
 
 
 def test_is_hash256_helper_works():
