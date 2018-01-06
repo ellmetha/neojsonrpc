@@ -26,7 +26,7 @@ Python_ 3.4+, Requests_ 2.0+.
 Installation
 ============
 
-To install neojsonrpc, please use pip (or pipenv) as follows:
+To install neojsonrpc, please use pip_ (or pipenv_) as follows:
 
 .. code-block:: shell
 
