@@ -35,7 +35,7 @@ To install neojsonrpc, please use pip_ (or pipenv_) as follows:
 Basic usage
 ===========
 
-The first step to interact with the NEO JSON-RPC interface is to initialize a `neojsonrpc.Client`
+The first step to interact with the NEO JSON-RPC interface is to initialize a ``neojsonrpc.Client``
 instance. The following examples respectively show how to get clients for the TestNet, the MainNet
 and an hypothetical local PrivNet:
 
