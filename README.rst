@@ -18,6 +18,11 @@ The client also provides a high-level interface to invoke contract methods on th
 .. contents:: Table of Contents
     :local:
 
+Documentation
+=============
+
+Online browsable documentation is available at https://neojsonrpc.readthedocs.io.
+
 Requirements
 ============
 
