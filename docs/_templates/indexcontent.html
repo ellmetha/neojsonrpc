@@ -1,0 +1,21 @@
+{%- extends "layout.html" %}
+
+{% set title = _("Welcome to NeoJsonRPC's documentation!") %}
+
+{% block body %}
+<div class="figure align-center" id="id1">
+  <h1>NeoJsonRPC</h1>
+  <p style="margin-bottom:0;"> Python JSON-RPC client for the NEO blockchain.</p>
+  <pre style="text-align:center;font-size:1vw;">
+     _  __           __             ___  ___  _____
+    / |/ ___ ___ __ / ______  ___  / _ \/ _ \/ ___/
+ /    / -_/ _ / // (_-/ _ \/ _ \/ , _/ ___/ /__
+/_/|_/\__/\___\___/___\___/_//_/_/|_/_/   \___/
+  </pre>
+  <p class="align-center"><a href="{{ pathto("getting_started") }}" class="btn btn-primary" title="Getting started"><span class="fa fa-bolt">&nbsp;Getting started</span></a></p>
+</div>
+<br />
+<div class="figure align-center" id="id2">
+  <p><strong>NeoJsonRPC</strong> is a Python JSON-RPC client for the NEO blockchain. It implements the JSON-RPC methods of the API interface provided by NEO nodes (minus the methods requiring an opened wallet). The client also provides a high-level interface to invoke contract methods on the NEO blockchain.</p>
+</div>
+{% endblock body %}

@@ -1,4 +1,4 @@
-neojsonrpc
+NeoJsonRPC
 ##########
 
 .. image:: https://img.shields.io/travis/ellmetha/neojsonrpc.svg
@@ -11,7 +11,7 @@ neojsonrpc
 
 |
 
-**Neojsonrpc** is a Python JSON-RPC client for the NEO blockchain. It implements the JSON-RPC
+**NeoJsonRPC** is a Python JSON-RPC client for the NEO blockchain. It implements the JSON-RPC
 methods of the API interface provided by NEO nodes (minus the methods requiring an opened wallet).
 The client also provides a high-level interface to invoke contract methods on the NEO blockchain.
 
@@ -26,7 +26,7 @@ Python_ 3.4+, Requests_ 2.0+.
 Installation
 ============
 
-To install neojsonrpc, please use pip_ (or pipenv_) as follows:
+To install NeoJsonRPC, please use pip_ (or pipenv_) as follows:
 
 .. code-block:: shell
 
