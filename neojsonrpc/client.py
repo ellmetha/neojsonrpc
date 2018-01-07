@@ -48,6 +48,17 @@ class Client:
     def contract(self, script_hash):
         """ Returns a ``ContractWrapper`` instance allowing to easily invoke contract functions.
 
+        This method allows to invoke smart contract functions as if they were Python class instance
+        methods. For example:
+
+        .. code-block:: python
+
+            >>> contract = client.contract('34af1b6634fcd7cfcff0158965b18601d3837e32')
+            >>> contract.symbol()
+            {...}
+            >>> contract.getBalance('<address>')
+            {...}
+
         :param script_hash: contract script hash
         :type script_hash: str
         :return: :class:`ContractWrapper <ContractWrapper>` object

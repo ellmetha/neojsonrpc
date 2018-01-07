@@ -1,14 +1,15 @@
+###############
 Getting started
-===============
+###############
 
 Requirements
-------------
+============
 
 * `Python`_ 3.4+
 * `Requests`_ 2.0+
 
 Installation
-------------
+============
 
 To install NeoJsonRPC, please use pip_ (or pipenv_) as follows:
 
@@ -17,7 +18,7 @@ To install NeoJsonRPC, please use pip_ (or pipenv_) as follows:
     $ pip install neojsonrpc
 
 Basic usage
------------
+===========
 
 In order to interact with the NEO JSON-RPC interface, all you have to do is to initialize a
 ``neojsonrpc.Client`` instance and to call one of the
