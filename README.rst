@@ -1,6 +1,21 @@
 NeoJsonRPC
 ##########
 
+.. image:: https://readthedocs.org/projects/neojsonrpc/badge/?version=stable
+    :target: https://neojsonrpc.readthedocs.org/en/stable/
+    :alt: Documentation Status
+
+.. image:: https://img.shields.io/pypi/l/neojsonrpc.svg
+    :target: https://pypi.python.org/pypi/neojsonrpc/
+    :alt: License
+
+.. image:: https://img.shields.io/pypi/pyversions/neojsonrpc.svg
+    :target: https://pypi.python.org/pypi/neojsonrpc
+
+.. image:: https://img.shields.io/pypi/v/neojsonrpc.svg
+    :target: https://pypi.python.org/pypi/neojsonrpc/
+    :alt: Latest Version
+
 .. image:: https://img.shields.io/travis/ellmetha/neojsonrpc.svg
     :target: https://travis-ci.org/ellmetha/neojsonrpc
     :alt: Build status
