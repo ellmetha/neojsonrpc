@@ -1,5 +1,5 @@
 #########################################
-NeoJsonRPC 0.1 release notes (2017-01-07)
+NeoJsonRPC 0.1 release notes (2018-01-07)
 #########################################
 
 Requirements and compatibility
