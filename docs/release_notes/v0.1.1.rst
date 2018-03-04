@@ -1,0 +1,13 @@
+###########################################
+NeoJsonRPC 0.1.1 release notes (2018-03-04)
+###########################################
+
+Requirements and compatibility
+------------------------------
+
+Python 3.4, 3.5 and 3.6. Requests 2.0+.
+
+Minor changes
+-------------
+
+* Updated default seeds for ``Client.for_mainnet`` and ``Client.for_testnet`` methods
