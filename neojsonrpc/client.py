@@ -38,12 +38,12 @@ class Client:
     @classmethod
     def for_mainnet(cls):
         """ Creates a ``Client`` instance for use with the NEO Main Net. """
-        return cls(host='seed3.neo.org', port=10331, tls=True)
+        return cls(host='seed1.cityofzion.io', port=8080)
 
     @classmethod
     def for_testnet(cls):
         """ Creates a ``Client`` instance for use with the NEO Test Net. """
-        return cls(host='seed3.neo.org', port=20331, tls=True)
+        return cls(host='test1.cityofzion.io', port=8880)
 
     def contract(self, script_hash):
         """ Returns a ``ContractWrapper`` instance allowing to easily invoke contract functions.

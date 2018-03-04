@@ -79,7 +79,7 @@ class TestClient:
         assert txout is None
 
     def test_can_return_node_peers(self):
-        client = Client(host='52.15.48.60', port=8880)
+        client = Client.for_testnet()
         peers = client.get_peers()
         assert peers
 
